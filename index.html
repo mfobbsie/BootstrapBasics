@@ -69,8 +69,33 @@
             >I agree to the terms and conditions</label
           >
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-success">Register</button>
       </form>
+
+      <div class="table-responsive mt-5">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody"></tbody>
+      </table>
+
+      <container-fluid class="bg-light p-3 mt-5">
+         <image
+        src="images/annie-spratt-9PXRUfRIH2A-unsplash.jpg" 
+        class="img-fluid rounded mx-auto d-block"
+        alt="Responsive image"
+      />
+      <image class="rounded-circle d-block mx-auto" src="images/20220918_164916.jpg" alt="Circle image" style="max-width: 150px; border-radius: 75px;" />
+      </container-fluid>
+
+      <button type="button" class="btn btn-secondary btn-lg position-fixed bottom-0 end-0 m-4 d-none" id="backToTop">Back to Top</button>
+     
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -91,6 +116,49 @@
             false,
           );
         });
+
+        const backToTopButton = document.getElementById("backToTop");
+        if (backToTopButton) {
+          backToTopButton.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+
+          const toggleBackToTopButton = () => {
+            if (window.scrollY > 200) {
+              backToTopButton.classList.add("d-md-block");
+            } else {
+              backToTopButton.classList.remove("d-md-block");
+            }
+          };
+
+          window.addEventListener("scroll", toggleBackToTopButton);
+          toggleBackToTopButton();
+        }
+
+        const users = [
+          { firstName: "Ava", lastName: "Patel", email: "ava.patel@example.com" },
+          { firstName: "Liam", lastName: "Johnson", email: "liam.johnson@example.com" },
+          { firstName: "Noah", lastName: "Kim", email: "noah.kim@example.com" },
+          { firstName: "Mia", lastName: "Garcia", email: "mia.garcia@example.com" },
+          { firstName: "Ethan", lastName: "Nguyen", email: "ethan.nguyen@example.com" },
+          { firstName: "Zoe", lastName: "Rivera", email: "zoe.rivera@example.com" }
+        ];
+
+        const userTableBody = document.getElementById("userTableBody");
+        if (userTableBody) {
+          userTableBody.innerHTML = users
+            .map(
+              (user, index) => `
+                <tr>
+                  <th scope="row">${index + 1}</th>
+                  <td>${user.firstName}</td>
+                  <td>${user.lastName}</td>
+                  <td>${user.email}</td>
+                </tr>
+              `,
+            )
+            .join("");
+        }
       })();
     </script>
   </body>
